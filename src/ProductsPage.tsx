@@ -33,7 +33,7 @@ interface FruitData {
   emoji: string;
   stars: number;
   price: number;
-  categories: string[]
+  categories: string[];
 }
 
 const ProductsPage: React.FC<FruitData> = () => {
@@ -78,24 +78,24 @@ const ProductsPage: React.FC<FruitData> = () => {
     } else if (value === 'avg-rating') {
       sortedData = [...fruitData].sort((a, b) => b.stars - a.stars);
     }
-
     setSortedArray(sortedData);
   };
 
   const handleCategoryChange = (e: any) => {
     const { name, checked } = e.target;
-    setSelectedCategories((prevSelectedCategories) => 
-      checked 
-        ? [...prevSelectedCategories, name] 
-        : prevSelectedCategories.filter((category) => category !== name)
+    setSelectedCategories((prevSelectedCategories) =>
+      checked
+        ? [...prevSelectedCategories, name]
+        : prevSelectedCategories.filter((category) => category !== name),
     );
   };
 
   const filteredFruitData = sortedArray.filter((fruit) => {
-    if (selectedCategories.length === 0) return true; // No category filter applied
-    return selectedCategories.every((category) => fruit.categories.includes(category));
+    if (selectedCategories.length === 0) return true;
+    return selectedCategories.every((category) =>
+      fruit.categories.includes(category),
+    );
   });
-
 
   return (
     <PageContainer>
@@ -103,19 +103,35 @@ const ProductsPage: React.FC<FruitData> = () => {
         <div>
           <h3>Categories</h3>
           <div>
-            <input name="domestic" type="checkbox"  onChange={handleCategoryChange}/>
+            <input
+              name="domestic"
+              type="checkbox"
+              onChange={handleCategoryChange}
+            />
             <label>Domestic</label>
           </div>
           <div>
-            <input name="exotic" type="checkbox"  onChange={handleCategoryChange}/>
+            <input
+              name="exotic"
+              type="checkbox"
+              onChange={handleCategoryChange}
+            />
             <label>Exotic</label>
           </div>
           <div>
-            <input name="sweet" type="checkbox"  onChange={handleCategoryChange}/>
+            <input
+              name="sweet"
+              type="checkbox"
+              onChange={handleCategoryChange}
+            />
             <label>Sweet</label>
           </div>
           <div>
-            <input name="tangy" type="checkbox"  onChange={handleCategoryChange}/>
+            <input
+              name="tangy"
+              type="checkbox"
+              onChange={handleCategoryChange}
+            />
             <label>Tangy</label>
           </div>
         </div>

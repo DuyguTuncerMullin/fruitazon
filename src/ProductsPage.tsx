@@ -33,12 +33,14 @@ interface FruitData {
   emoji: string;
   stars: number;
   price: number;
+  categories: string[]
 }
 
 const ProductsPage: React.FC<FruitData> = () => {
   const [seachTerm, setSearchTerm] = useState('');
   const [fruitData, setFruitData] = useState<FruitData[]>([]);
   const [sortedArray, setSortedArray] = useState(fruitData);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,25 +82,40 @@ const ProductsPage: React.FC<FruitData> = () => {
     setSortedArray(sortedData);
   };
 
+  const handleCategoryChange = (e: any) => {
+    const { name, checked } = e.target;
+    setSelectedCategories((prevSelectedCategories) => 
+      checked 
+        ? [...prevSelectedCategories, name] 
+        : prevSelectedCategories.filter((category) => category !== name)
+    );
+  };
+
+  const filteredFruitData = sortedArray.filter((fruit) => {
+    if (selectedCategories.length === 0) return true; // No category filter applied
+    return selectedCategories.every((category) => fruit.categories.includes(category));
+  });
+
+
   return (
     <PageContainer>
       <Sidebar>
         <div>
           <h3>Categories</h3>
           <div>
-            <input name="domestic" type="checkbox" />
+            <input name="domestic" type="checkbox"  onChange={handleCategoryChange}/>
             <label>Domestic</label>
           </div>
           <div>
-            <input name="exotic" type="checkbox" />
+            <input name="exotic" type="checkbox"  onChange={handleCategoryChange}/>
             <label>Exotic</label>
           </div>
           <div>
-            <input name="sweet" type="checkbox" />
+            <input name="sweet" type="checkbox"  onChange={handleCategoryChange}/>
             <label>Sweet</label>
           </div>
           <div>
-            <input name="tangy" type="checkbox" />
+            <input name="tangy" type="checkbox"  onChange={handleCategoryChange}/>
             <label>Tangy</label>
           </div>
         </div>
@@ -125,7 +142,7 @@ const ProductsPage: React.FC<FruitData> = () => {
         </TopbarContainer>
         {/* <div>Product listings go here</div> */}
         <div className="main-container">
-          {sortedArray.map(({ id, name, emoji, stars, price }) => (
+          {filteredFruitData.map(({ id, name, emoji, stars, price }) => (
             <FruitList
               key={id}
               id={id}

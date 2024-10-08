@@ -12,7 +12,7 @@ npm i && npm run dev
 ```
 
 UI: http://localhost:3001  
-API: http://ocalhost:3001/api/fruits
+API: http://localhost:3001/api/fruits
 
 ## Challenge Prompt
 

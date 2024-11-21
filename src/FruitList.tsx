@@ -1,27 +1,20 @@
 interface FruitListProps {
-  id: number;
   name: string;
   emoji: string;
   stars: number;
   price: number;
 }
 
-const FruitList: React.FC<FruitListProps> = ({
-  id,
-  name,
-  emoji,
-  stars,
-  price,
-}) => {
+const FruitList: React.FC<FruitListProps> = ({ name, emoji, stars, price }) => {
   return (
-      <ul className="container">
-        <li key={id} className="fruit-box">
-          <span className={'emoji'}>{emoji}</span>
-          <p>{name}</p>
-          <p>{price}</p>
-          <p>Avg. rating: {stars}</p>
-        </li>
-      </ul>
+    <div className="list-item">
+      <span className="emoji">{emoji}</span>
+      <div className="product-details">
+        <span>{name}</span>
+        <span>{price}</span>
+        <span>Avg. rating: {stars}</span>
+      </div>
+    </div>
   );
 };
 

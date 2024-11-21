@@ -7,31 +7,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
+.main-container {
   display: flex;
   flex-wrap: wrap;
-  list-style-type: none;
-  width: 100%; /* Ensure container takes full width */
 }
 
-.fruit-box {
+.list-item {
+  flex-basis: 30%;
   border: solid;
-  padding: 10px;
   margin: 5px;
-  width: 20%;
-  box-sizing: border-box; /* Prevent padding and border from overflowing */
-
+  padding: 10px;
 }
-
-/* .emoji-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
 .emoji {
   font-size: 100px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding: 20px
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
 }
